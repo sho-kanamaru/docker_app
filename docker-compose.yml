@@ -1,0 +1,43 @@
+# version: '2'
+# services:
+#   web:
+#     build: .
+#     volumes:
+#       - .:/app
+#     ports:
+#       - 3000:3000
+#     links:
+#       - mysql
+
+#   mysql:
+#     image: mariadb:10.3.0
+#     ports:
+#       - 3306:3306
+#     volumes:
+#       - ./data/mysql:/var/lib/mysql
+#     environment:
+#       MYSQL_DATABASE: jobtalk
+#       MYSQL_ROOT_PASSWORD: root
+
+version: '2'
+services:
+  app:
+    build: .
+    environment:
+      RAILS_ENV: development
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/app
+    links:
+      - mysql
+
+  mysql:
+    image: sho/docker_app
+    ports:
+      - 3306:3306
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: docker
+      MYSQL_ROOT_PASSWORD: root
